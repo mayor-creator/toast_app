@@ -6,7 +6,7 @@ import {
   X,
 } from "react-feather";
 
-import VisuallyHidden from "../VisuallyHidden";
+import { VisuallyHidden } from "../VisuallyHidden/VisuallyHidden";
 
 import styles from "./Toast.module.css";
 
