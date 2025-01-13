@@ -10,6 +10,17 @@ export function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState("notice");
   const [popToast, setPopToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const handlePopToast = () => {
+    if (!message) {
+      setErrorMessage("Please enter a message");
+      setVariant("error");
+    } else {
+      setErrorMessage("");
+      setPopToast(true);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -23,6 +34,14 @@ export function ToastPlayground() {
           message={message}
           variant={variant}
           handleDismiss={() => setPopToast(false)}
+        />
+      )}
+
+      {errorMessage && (
+        <Toast
+          message={errorMessage}
+          variant={variant}
+          handleDismiss={() => setErrorMessage(false)}
         />
       )}
 
@@ -69,7 +88,7 @@ export function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={() => setPopToast(true)}>Pop Toast!</Button>
+            <Button onClick={handlePopToast}>Pop Toast!</Button>
           </div>
         </div>
       </div>
