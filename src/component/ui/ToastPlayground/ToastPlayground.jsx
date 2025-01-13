@@ -13,7 +13,7 @@ export function ToastPlayground() {
   const [errorMessage, setErrorMessage] = useState(false);
 
   const handlePopToast = () => {
-    if (!message) {
+    if (!message || message.trim() === "") {
       setErrorMessage("Please enter a message");
       setVariant("error");
     } else {
