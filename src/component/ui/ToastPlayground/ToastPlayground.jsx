@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
+import { Toast } from "../Toast/Toast";
 
 import styles from "./ToastPlayground.module.css";
 
@@ -15,6 +16,8 @@ export function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      <Toast />
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>

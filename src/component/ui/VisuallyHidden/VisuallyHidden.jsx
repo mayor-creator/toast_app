@@ -1,9 +1,8 @@
 import React from "react";
-import process from "node:process";
 
 import styles from "./VisuallyHidden.module.css";
 
-export const VisuallyHidden = ({ children, className = "", ...delegated }) => {
+export function VisuallyHidden({ children, className = "", ...delegated }) {
   const [forceShow, setForceShow] = React.useState(false);
 
   React.useEffect(() => {
@@ -37,6 +36,6 @@ export const VisuallyHidden = ({ children, className = "", ...delegated }) => {
       {children}
     </span>
   );
-};
+}
 
 VisuallyHidden.propTypes;
