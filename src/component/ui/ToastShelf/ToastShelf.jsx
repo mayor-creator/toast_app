@@ -1,36 +1,12 @@
-import { useState } from "react";
+import { useContext } from "react";
+import PropTypes from "prop-types";
+
+import { ToastContext } from "../ToastProvider/ToastContext";
 import Toast from "../Toast/Toast";
 import styles from "./ToastShelf.module.css";
 
-export function ToastShelf() {
-  const [toasts, setToasts] = useState([
-    {
-      id: crypto.randomUUID(),
-      message: "Something went wrong!",
-      variant: "error",
-    },
-    {
-      id: crypto.randomUUID(),
-      message: "17 photos uploaded",
-      variant: "success",
-    },
-  ]);
-
-  const addToast = (message, variant) => {
-    const nextToast = [
-      ...toasts,
-      {
-        id: crypto.randomUUID(),
-        message,
-        variant,
-      },
-    ];
-    setToasts(nextToast);
-  };
-
-  const removeToast = (id) => {
-    setToasts(toasts.filter((toast) => toast.id !== id));
-  };
+export function ToastShelf({ toasts }) {
+  const { removeToast } = useContext(ToastContext);
 
   return (
     <>
@@ -50,3 +26,5 @@ export function ToastShelf() {
     </>
   );
 }
+
+ToastShelf.propTypes = { toasts: PropTypes.array };

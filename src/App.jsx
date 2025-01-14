@@ -1,3 +1,4 @@
+import { ToastProvider } from "./component/ui/ToastProvider/ToastContext";
 import { ToastPlayground } from "./component/ui/ToastPlayground/ToastPlayground";
 
 import "./App.css";
@@ -5,7 +6,9 @@ import "./App.css";
 export default function App() {
   return (
     <>
-      <ToastPlayground />
+      <ToastProvider>
+        <ToastPlayground />
+      </ToastProvider>
     </>
   );
 }

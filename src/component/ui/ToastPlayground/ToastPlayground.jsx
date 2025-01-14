@@ -1,17 +1,15 @@
-import { useState } from "react";
+import { ToastContext } from "../ToastProvider/ToastContext";
 import { Button } from "../Button/Button";
-// import { Toast } from "../Toast/Toast";
 import { ToastShelf } from "../ToastShelf/ToastShelf";
 
 import styles from "./ToastPlayground.module.css";
+import { useContext } from "react";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
-export function ToastPlayground({ addToast }) {
-  const [message, setMessage] = useState("");
-  const [variant, setVariant] = useState("notice");
-  const [popToast, setPopToast] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+export function ToastPlayground() {
+  // const [popToast, setPopToast] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState(false);
 
   // const handlePopToast = () => {
   //   if (!message || message.trim() === "") {
@@ -22,11 +20,14 @@ export function ToastPlayground({ addToast }) {
   //     setPopToast(true);
   //   }
   // };
-  const handleOnsubmit = (event) => {
-    event.preventDefault();
-    addToast(message, variant);
-    setMessage;
-  };
+  const {
+    message,
+    variant,
+    toasts,
+    handleMessageChange,
+    handleVariantChange,
+    handleOnsubmit,
+  } = useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
@@ -51,7 +52,7 @@ export function ToastPlayground({ addToast }) {
         />
       )} */}
 
-      <ToastShelf addToast={addToast} />
+      <ToastShelf toasts={toasts} />
 
       <form className={styles.controlsWrapper} onSubmit={handleOnsubmit}>
         <div className={styles.row}>
@@ -67,7 +68,7 @@ export function ToastPlayground({ addToast }) {
               id="message"
               className={styles.messageInput}
               value={message}
-              onChange={(event) => setMessage(event.target.value)}
+              onChange={handleMessageChange}
             />
           </div>
         </div>
@@ -83,7 +84,7 @@ export function ToastPlayground({ addToast }) {
                   name="variant"
                   value={option}
                   checked={option === variant}
-                  onChange={(event) => setVariant(event.target.value)}
+                  onChange={handleVariantChange}
                 />
                 {option}
               </label>
