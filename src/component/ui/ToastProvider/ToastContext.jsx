@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ToastContext = createContext();
 
 export function ToastProvider({ children }) {
@@ -16,9 +17,13 @@ export function ToastProvider({ children }) {
 
   const handleOnsubmit = (event) => {
     event.preventDefault();
-    addToast(message, variant);
-    setMessage("");
-    setVariant("notice");
+    if (!message || message.trim() === "") {
+      addToast("Please enter a message", "error");
+    } else {
+      addToast(message, variant);
+      setMessage("");
+      setVariant("notice");
+    }
   };
 
   const [toasts, setToasts] = useState([
