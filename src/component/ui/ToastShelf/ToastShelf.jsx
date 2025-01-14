@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Toast from "../Toast/Toast";
-import { ToastPlayground } from "../ToastPlayground/ToastPlayground";
 import styles from "./ToastShelf.module.css";
 
 export function ToastShelf() {
@@ -35,7 +34,6 @@ export function ToastShelf() {
 
   return (
     <>
-      <ToastPlayground addToast={addToast} />
       <ol className={styles.wrapper}>
         {toasts.map((toast) => (
           <li key={toast.id} className={styles.toastWrapper}>
