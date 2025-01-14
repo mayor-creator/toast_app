@@ -18,11 +18,11 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-export function Toast({ message, variant, handleDismiss }) {
+export default function Toast({ message, variant, handleDismiss, id }) {
   const Icon = ICONS_BY_VARIANT[variant];
 
   return (
-    <div className={`${styles.toast} ${styles[variant]}`}>
+    <div className={`${styles.toast} ${styles[variant]}`} id={id}>
       <div className={styles.iconContainer}>
         <Icon size={24} />
       </div>
@@ -39,4 +39,5 @@ Toast.propTypes = {
   message: PropTypes.string,
   variant: PropTypes.string,
   handleDismiss: PropTypes.func,
+  id: PropTypes.string,
 };

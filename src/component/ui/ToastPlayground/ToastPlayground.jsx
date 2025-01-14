@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
-import { Toast } from "../Toast/Toast";
+// import { Toast } from "../Toast/Toast";
+import { ToastShelf } from "../ToastShelf/ToastShelf";
 
 import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
-export function ToastPlayground() {
+export function ToastPlayground({ addToast }) {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState("notice");
   const [popToast, setPopToast] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const handlePopToast = () => {
-    if (!message || message.trim() === "") {
-      setErrorMessage("Please enter a message");
-      setVariant("error");
-    } else {
-      setErrorMessage("");
-      setPopToast(true);
-    }
+  // const handlePopToast = () => {
+  //   if (!message || message.trim() === "") {
+  //     setErrorMessage("Please enter a message");
+  //     setVariant("error");
+  //   } else {
+  //     setErrorMessage("");
+  //     setPopToast(true);
+  //   }
+  // };
+  const handleOnsubmit = (event) => {
+    event.preventDefault();
+    addToast(message, variant);
+    setMessage;
   };
 
   return (
@@ -29,7 +35,7 @@ export function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      {popToast && (
+      {/* {popToast && (
         <Toast
           message={message}
           variant={variant}
@@ -43,9 +49,11 @@ export function ToastPlayground() {
           variant={variant}
           handleDismiss={() => setErrorMessage(false)}
         />
-      )}
+      )} */}
 
-      <div className={styles.controlsWrapper}>
+      <ToastShelf addToast={addToast} />
+
+      <form className={styles.controlsWrapper} onSubmit={handleOnsubmit}>
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -88,10 +96,10 @@ export function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={handlePopToast}>Pop Toast!</Button>
+            <Button type="submit">Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
